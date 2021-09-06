@@ -1,0 +1,71 @@
+\documentclass{article}
+
+\usepackage[a4paper]{geometry}
+
+\usepackage[newfloat]{minted}
+\usepackage{caption}
+\usepackage{lastpage}
+
+\usepackage{fontspec}
+\setmainfont{DejaVuSerif}
+\setsansfont{DejaVuSans}
+\setmonofont{DejaVuSansMono}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguages{english}
+
+\renewcommand{\listingname}{Листинг}
+\renewcommand{\listlistingname}{Список листингов}
+
+\newcommand{\codelst}{\begingroup
+    \catcode`_=12 \docodelst
+}
+\newcommand{\docodelst}[1]{%
+    \captionof{listing}{\texttt{#1}}
+    \inputminted[autogobble,breaklines,breakanywhere,linenos]{text}{#1}
+    \endgroup
+}
+
+\newcommand{\smartlistoflistings}{\begingroup
+    \catcode`_=12
+    \listoflistings
+    \endgroup
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \hspace{0pt}
+    \vfill
+
+    {\Large ПРОГРАММА ДЛЯ ЭВМ \par}
+    {\LARGE <<Название программы>> \par} % Заменить
+
+    \vspace{1cm}
+    {Депонируемые материалы, идентифицирующие программу для ЭВМ}
+
+    \vspace{0.5cm}
+    {Всего листов --- \pageref{LastPage}}
+
+    \vfill
+
+    {\raggedleft Автор: \par}
+    {\raggedleft Фамилия Имя Отчество \par} % Заменить
+
+    \vfill
+    {Город, \the\year{}} % Заменить
+\end{titlepage}
+\setcounter{page}{2}
+\newpage
+
+\smartlistoflistings
+\newpage
+
+
+% \codelst{Путь к файлу}
+\codelst{code_example/hello_world.c}
+
+
+\end{document}
